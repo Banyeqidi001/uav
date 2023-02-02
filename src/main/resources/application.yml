@@ -1,0 +1,117 @@
+server:
+  port: 6789
+spring:
+  application:
+    name: cloud-api-sample
+  datasource:
+    druid:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/cloud_sample?useSSL=false&allowPublicKeyRetrieval=true
+      username: robot
+      password: 1qaz@2WSX
+      initial-size: 10
+      min-idle: 10
+      max-active: 20
+      max-wait: 60000
+
+  redis:
+    host: localhost
+    port: 6379
+    database: 1
+    username: # if you enable
+    password:
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+
+  servlet:
+    multipart:
+      max-file-size: 2GB
+      max-request-size: 2GB
+
+jwt:
+  issuer: DJI
+  subject: CloudApiSample
+  secret: CloudApiSample
+  age: 86400
+
+mqtt:
+  protocol: tcp
+  host: 192.168.0.141 #192.168.1.101
+  port: 1883
+  username: admin
+  password: admin
+  client-id: 123456
+  # Topics that need to be subscribed when initially connecting to mqtt, multiple topics are divided by ",".
+  inbound-topic: sys/product/+/status,thing/product/+/requests
+
+url:
+  manage:
+    prefix: /manage
+    version: /api/v1
+  map:
+    prefix: /map
+    version: /api/v1
+  media:
+    prefix: /media
+    version: /api/v1
+  wayline:
+    prefix: /wayline
+    version: /api/v1
+  storage:
+    prefix: /storage
+    version: /api/v1
+  control:
+    prefix: /control
+    version: /api/v1
+
+# Tutorial: https://help.aliyun.com/document_detail/100624.htm?spm=a2c4g.11186623.0.0.74075e34eIhK7T#concept-xzh-nzk-2gb
+oss:
+  enable: true
+  provider: ali # @see com.dji.sample.component.OssConfiguration.model.enums.OssTypeEnum
+  endpoint: https://oss-cn-qingdao.aliyuncs.com
+  access-key: LTAI5t7JJfWJDetfLi8t8i6S
+  secret-key: mO6s89LyWtQwYKLwkpwBaIu1BxiSWB
+  expire: 3600
+  region: cn-qingdao # cn-hangzhou
+  role-session-name: cloudApi
+  role-arn: acs:ram::1822273241883033:role/lingyi  # acs:ram::123456789:role/stsrole
+  bucket: robot11
+  object-dir-prefix: 123
+
+#oss:
+#  enable: true
+#  provider: aws
+#  endpoint: https://s3.us-east-1.amazonaws.com
+#  access-key:
+#  secret-key:
+#  expire: 3600
+#  region: us-east-1
+#  role-session-name: cloudApi
+#  role-arn:
+#  bucket: cloudapi-bucket
+#  object-dir-prefix: wayline
+
+#oss:
+#  enable: true
+#  provider: minio
+#  endpoint: http://192.168.0.141:9000
+#  access-key: minioadmin #VX9JiSxuygaAOFOw
+#  secret-key: minioadmin #hN5cbzKlzWBB70F9Ul77Whi41b0SAJJi
+#  bucket: cloud-bucket
+#  expire: 3600
+#  region: us-west-rack-2
+#  object-dir-prefix: wayline
+
+logging:
+  level:
+    com.dji.sample: debug
+  file:
+    name: logs/cloud-api-sample.log
+
+ntp:
+  server:
+    host: Google.mzr.me
